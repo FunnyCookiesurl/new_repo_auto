@@ -1,0 +1,13 @@
+Дефект 1:
+Method: contains  
+Problem: Не обрабатывает передачу None
+Input data: contains(None, "a")
+Expected result: False или понятное сообщение об ошибке
+Actual result: AttributeError: 'NoneType' object has no attribute 'index'
+
+Дефект 2:
+Method: trim
+Problem: Удаляет только обычные пробелы, но не другие другие символы
+Input data: "\thello", "\nhello"
+Expected result: "hello" (удалены табуляции и переносы строк)
+Actual result: "\thello", "\nhello" (символы остаются)
