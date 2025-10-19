@@ -11,27 +11,38 @@ WebDriverWait(driver, 10).until(
     EC.presence_of_element_located((By.ID, "user-name"))
 )
 
-input_field = driver.find_element(By.ID, 'user-name')
-input_field.send_keys("standard_user")
-input_field = driver.find_element(By.ID, 'password')
-input_field.send_keys("secret_sauce")
+login_data = {
+    'user-name': "standard_user",
+    'password': "secret_sauce"
+}
+
+for field_id, value in login_data.items():
+    input_field = driver.find_element(By.ID, field_id)
+    input_field.send_keys(value)
+
 driver.find_element(By.ID, "login-button").click()
-driver.find_element(
-    By.ID, "add-to-cart-sauce-labs-backpack").click()
-driver.find_element(
-    By.ID, "add-to-cart-sauce-labs-bolt-t-shirt").click()
-driver.find_element(
-    By.ID, "add-to-cart-sauce-labs-onesie").click()
-driver.find_element(
-    By.ID, "shopping_cart_container").click()
-driver.find_element(
-    By.ID, "checkout").click()
-input_field = driver.find_element(By.ID, 'first-name')
-input_field.send_keys("Алексей")
-input_field = driver.find_element(By.ID, 'last-name')
-input_field.send_keys("Кравченко")
-input_field = driver.find_element(By.ID, 'postal-code')
-input_field.send_keys("344000")
+
+actions = [
+    "add-to-cart-sauce-labs-backpack",
+    "add-to-cart-sauce-labs-bolt-t-shirt", 
+    "add-to-cart-sauce-labs-onesie",
+    "shopping_cart_container",
+    "checkout"
+]
+
+for button_id in actions:
+    driver.find_element(By.ID, button_id).click()
+
+form_data = {
+    'first-name': "Алексей",
+    'last-name': "Кравченко",
+    'postal-code': "344000"
+}
+
+for field_id, value in form_data.items():
+    input_field = driver.find_element(By.ID, field_id)
+    input_field.send_keys(value)
+
 driver.find_element(By.ID, "continue").click()
 
 total = driver.find_element(By.CSS_SELECTOR, ".summary_total_label").text
